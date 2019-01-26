@@ -103,17 +103,20 @@ public class Grid : MonoBehaviour
         return new Tuple<int, int>(cellX, celly);
     }
 
-    // Update is called once per frame
-    void Update()
+    public Tuple<Tuple<int, int>, Vector3> CurrentCellPosition()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         float enter = 0.0f;
         if (plane.Raycast(ray, out enter))
         {
             Vector3 hitPoint = ray.GetPoint(enter);
-            Debug.Log(hitPoint.x + " " + hitPoint.y + " " + hitPoint.z);
-            var cell = this.CellFromPosition(hitPoint);
-            Debug.Log(cell.Item1 + " " + cell.Item2);
+            return new Tuple<Tuple<int, int>, Vector3>(this.CellFromPosition(hitPoint), hitPoint);
         }
+        return null;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
     }
 }
