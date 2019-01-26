@@ -15,7 +15,7 @@ public class ResourceManager : MonoBehaviour
     void Start()
     {
         gold = GameObject.Find("Gold").GetComponent<Resource>();
-        gold.set(100);
+        gold.set(25);
 
         InvokeRepeating("UpdateGold", 0f, 1f);
 

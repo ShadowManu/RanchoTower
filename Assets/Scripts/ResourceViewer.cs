@@ -24,6 +24,6 @@ public class ResourceViewer : MonoBehaviour{
     }
 
     void SetAmountText(){
-        amountText.text = "Gold: " + gold.amount.ToString ();
+        amountText.text = gold.amount.ToString ();
     }
 }
