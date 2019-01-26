@@ -79,11 +79,11 @@ public class Grid : MonoBehaviour
     public Vector2 CellPosition(int x, int y)
     {
         float cellSizeX = this.gameObject.transform.localScale.x * 10 / this.sizeX;
-        float cellSizeY = this.gameObject.transform.localScale.y * 10 / this.sizeY;
+        float cellSizeY = this.gameObject.transform.localScale.z * 10 / this.sizeY;
 
         Vector2 topLeftCorner = new Vector2(
             (this.gameObject.transform.position.x - 5) * this.gameObject.transform.localScale.x,
-            (this.gameObject.transform.position.y + 5) * this.gameObject.transform.localScale.y);
+            (this.gameObject.transform.position.z + 5) * this.gameObject.transform.localScale.z);
 
         return new Vector2(topLeftCorner.x + cellSizeX / 2 + x * cellSizeX,
             topLeftCorner.y - cellSizeY / 2 - y * cellSizeY);
@@ -92,11 +92,11 @@ public class Grid : MonoBehaviour
     public Tuple<int, int> CellFromPosition(Vector3 vec)
     {
         float cellSizeX = this.gameObject.transform.localScale.x * 10 / this.sizeX;
-        float cellSizeY = this.gameObject.transform.localScale.y * 10 / this.sizeY;
+        float cellSizeY = this.gameObject.transform.localScale.z * 10 / this.sizeY;
 
         Vector2 topLeftCorner = new Vector2(
             (this.gameObject.transform.position.x - 5) * this.gameObject.transform.localScale.x,
-            (this.gameObject.transform.position.y + 5) * this.gameObject.transform.localScale.y);
+            (this.gameObject.transform.position.z + 5) * this.gameObject.transform.localScale.z);
 
         var cellX = Mathf.FloorToInt((vec.x - topLeftCorner.x) / cellSizeX);
         var celly = Mathf.FloorToInt((topLeftCorner.y - vec.z) / cellSizeY);

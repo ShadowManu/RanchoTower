@@ -15,4 +15,6 @@ public interface IGridObject
     void kill();
 
     string Tag();
+
+    void SetGridPosition(int x, int y);
 }

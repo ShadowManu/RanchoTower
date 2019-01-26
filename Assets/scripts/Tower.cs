@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class TestBuilding : MonoBehaviour, IGridObject
+public class Tower : MonoBehaviour, IGridObject
 {
-    private readonly bool[,] shape = new bool[,] { { true, true, true }, { true, true, false }, { true, false, false } };
+    private readonly bool[,] shape = new bool[,] { { true } };
     public int gridPosX;
     public int gridPosY;
+
+    public void SetGridPosition(int x, int y)
+    {
+        this.gridPosX = x;
+        this.gridPosY = y;
+    }
 
     public Tuple<bool[,], Tuple<int, int>> Space()
     {
