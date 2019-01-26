@@ -11,6 +11,7 @@ enum TowerMode
 public class TowerAttackBehavior : MonoBehaviour
 {
   public float power = 5.0f;
+  public int period = 1;
 
   CapsuleCollider rangeTrigger;
   GameObject target;
@@ -33,8 +34,7 @@ public class TowerAttackBehavior : MonoBehaviour
     target = gameObject;
     hPBehavior = gameObject.GetComponent<HPBehaviour>();
 
-    var ATTACK_PERIOD = 1;
-    InvokeRepeating("AttackCycle", 0, ATTACK_PERIOD);
+    InvokeRepeating("AttackCycle", 0, period);
   }
 
   void AttackCycle()
@@ -54,7 +54,8 @@ public class TowerAttackBehavior : MonoBehaviour
     }
     else
     {
-      hPBehavior.decreaseHP((int)power);
+      hPBehavior.decreaseHP(power);
+      Debug.Log("Attacked with: " + power + ". life is now: " + hPBehavior.currentHP);
     }
   }
 
