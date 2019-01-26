@@ -19,6 +19,7 @@ public class HPBehaviour : MonoBehaviour
   public void decreaseHP(float dm)
   {
     currentHP = currentHP - dm;
+    if (currentHP <= 0) Destroy(gameObject);
   }
 
 
