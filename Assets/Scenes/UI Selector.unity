@@ -318,6 +318,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94800602}
   m_CullTransparentMesh: 0
+--- !u!20 &129678103 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1682435233969123477, guid: 09a4bd4c89cbf954a85e82c3039eb381,
+    type: 3}
+  m_PrefabInstance: {fileID: 473196740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &161912730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeX: 1000
   sizeY: 1000
-  cam: {fileID: 0}
+  cam: {fileID: 129678103}
 --- !u!64 &1307516027
 MeshCollider:
   m_ObjectHideFlags: 0

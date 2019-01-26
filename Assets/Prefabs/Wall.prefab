@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5696463688915677577}
   - component: {fileID: 5189264603004680704}
   - component: {fileID: 4290706994749718278}
+  - component: {fileID: 5597799450699869072}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -91,6 +92,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5597799450699869072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968974605864669753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f405a31cdc93148919f81b4aa6aa6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPosX: 0
+  gridPosY: 0
 --- !u!1 &3911083538638492743
 GameObject:
   m_ObjectHideFlags: 0
