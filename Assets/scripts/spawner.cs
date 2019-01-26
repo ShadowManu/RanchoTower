@@ -2,56 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
-    public GameObject Mob;
+  public GameObject MobPrefab; // Prefab to spawn
+  public GameObject EnemyTarget;
 
-    public float InitialCoolDown;
+  public float initialCooldown;
+  public float waveCooldown;
+  public int waveAmount;
 
-    public float WaveCooldown;
+  void Start()
+  {
+    StartCoroutine("RunWaves");
+  }
 
-    public int WaveAmount;
+  IEnumerator RunWaves()
+  {
+    // Initial wait
+    yield return new WaitForSeconds(initialCooldown);
 
-    private float NextWaveTime;
-
-    private int ToSpawn;
-
-    private int EnemyOnSpawn;
-
-    public GameObject EnemyTarget;
-
-    // Start is called before the first frame update
-    void Start()
+    while (true)
     {
-        this.NextWaveTime = this.InitialCoolDown;
-        this.ToSpawn = 0;
-        this.EnemyOnSpawn = 0;
-    }
+      // Spawn each mob with some delay
+      for (var i = 0; i < waveAmount; i++)
+      {
+        var mob = Instantiate(MobPrefab, transform.position, transform.rotation);
+        mob.GetComponent<EnemyBehavior>().target = EnemyTarget;
 
-    // Update is called once per frame
-    void Update()
-    {
-        this.NextWaveTime -= Time.deltaTime;
-        if (this.NextWaveTime <= 0)
-        {
-            this.ToSpawn += this.WaveAmount;
-            this.NextWaveTime += this.WaveCooldown;
-        }
-        if (this.ToSpawn > 0 && this.EnemyOnSpawn == 0)
-        {
-            var newObj = Instantiate(Mob);
-            ((EnemyBehavior)newObj.GetComponentInChildren(typeof(EnemyBehavior))).target = EnemyTarget;
-            newObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-            this.ToSpawn--;
-        }
-    }
+        mob.GetComponent<Rigidbody>().AddForce(randomVector(), ForceMode.Impulse);
+        yield return new WaitForSeconds(0.3f);
+      }
 
-    void OnCollisionEnter(Collision col)
-    {
-        this.EnemyOnSpawn += col.gameObject.tag == "Enemy" ? 1 : 0;
+      // Wait between waves
+      yield return new WaitForSeconds(waveCooldown);
     }
-    void OnCollisionExit(Collision col)
-    {
-        this.EnemyOnSpawn -= col.gameObject.tag == "Enemy" ? 1 : 0;
-    }
+  }
+
+  Vector3 randomVector()
+  {
+    var MIN_FORCE = 5;
+    var MAX_FORCE = 10;
+
+    var direction = Vector3.ProjectOnPlane(Random.insideUnitCircle.normalized, Vector3.up);
+    return direction * Random.Range(MIN_FORCE, MAX_FORCE);
+  }
 }
