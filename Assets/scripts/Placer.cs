@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Placer : MonoBehaviour
 {
-    public GameObject Prefab;
+    private GameObject Prefab;
     public Grid Grid;
 
     public Material CanPlace;
@@ -20,9 +20,14 @@ public class Placer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    public void SetPrefab(GameObject _Prefab){ 
+        this.Prefab = _Prefab;
         intancedO = Instantiate(Prefab);
         instancedOriginalM = intancedO.transform.GetChild(0).GetComponent<MeshRenderer>().material;
-    }
+     }
 
     // Update is called once per frame
     void Update()
@@ -41,9 +46,7 @@ public class Placer : MonoBehaviour
                     Grid.Put(igrid, pos.Item1.Item1, pos.Item1.Item2);
                     igrid.SetGridPosition(pos.Item1.Item1, pos.Item1.Item2);
                     intancedO.transform.GetChild(0).GetComponent<MeshRenderer>().material = instancedOriginalM;
-                    intancedO = Instantiate(Prefab);
-                    instancedOriginalM = intancedO.transform.GetChild(0).GetComponent<MeshRenderer>().material;
-                    intancedO.transform.position = new Vector3(pos2.x, 0, pos2.y);
+                    Prefab = null;
                 }
             }
             else
