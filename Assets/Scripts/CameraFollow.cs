@@ -6,18 +6,29 @@ public class CameraFollow : MonoBehaviour
 {
   public Vector3 offset = new Vector3(-10, 5, -10);
 
-  public float zoomMultiplier = 20;
-  float targetZoom = 9;
-  float zoomVelocity = 0;
+  public float targetZoom = 5;
+  public float zoomStepMultiplier = 20;
+  public float minTargetZoom = 3;
+  public float maxTargetZoom = 15;
 
-  public GameObject player;
+  private float zoomVelocity = 0;
+
+  public GameObject target;
   Camera cam;
 
   // Start is called before the first frame update
   void Start()
   {
     cam = GetComponent<Camera>();
-    cam.nearClipPlane = -100;
+    cam.orthographicSize = targetZoom;
+
+    if (target == null)
+    {
+      var player = GameObject.Find("Player");
+
+      if (player != null) target = player;
+      else Debug.Log("OrtoCamera does not have a valid target or automatic player");
+    }
   }
 
   // Update is called once per frame
@@ -25,8 +36,8 @@ public class CameraFollow : MonoBehaviour
   {
     detectAndApplyZoom();
 
-    transform.position = player.transform.position + offset;
-    transform.LookAt(player.transform.position);
+    transform.position = target.transform.position + offset;
+    transform.LookAt(target.transform.position);
   }
 
   void detectAndApplyZoom()
@@ -35,8 +46,8 @@ public class CameraFollow : MonoBehaviour
 
     if (axis != 0)
     {
-      var desiredTargetZoom = targetZoom + (-axis) * zoomMultiplier;
-      targetZoom = Mathf.Clamp(desiredTargetZoom, 5, 13);
+      var desiredTargetZoom = targetZoom + (-axis) * zoomStepMultiplier;
+      targetZoom = Mathf.Clamp(desiredTargetZoom, minTargetZoom, maxTargetZoom);
     }
 
     // Zoom if needed
