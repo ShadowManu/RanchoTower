@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuadriculaScript : MonoBehaviour
+public class Grid : MonoBehaviour
 {
 
     public int sizeX;
     public int sizeY;
     private Tuple<bool, IGridObject>[,] matrix;
+
+    public Camera cam;
+
+    private readonly Plane plane = new Plane(Vector3.up, Vector3.zero);
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,7 @@ public class CuadriculaScript : MonoBehaviour
             for (int j = y; j != y + space.Item2.Item2; j++)
                 if (space.Item1[i - x, j - y] && this.matrix[i, j].Item1)
                     this.matrix[i, j] = new Tuple<bool, IGridObject>(false, null);
+        o.kill();
     }
 
     public void Put(IGridObject o, int x, int y)
@@ -70,9 +75,45 @@ public class CuadriculaScript : MonoBehaviour
         return result;
     }
 
+    // coordinates of center of a cell
+    public Vector2 CellPosition(int x, int y)
+    {
+        float cellSizeX = this.gameObject.transform.localScale.x * 10 / this.sizeX;
+        float cellSizeY = this.gameObject.transform.localScale.y * 10 / this.sizeY;
+
+        Vector2 topLeftCorner = new Vector2(
+            (this.gameObject.transform.position.x - 5) * this.gameObject.transform.localScale.x,
+            (this.gameObject.transform.position.y + 5) * this.gameObject.transform.localScale.y);
+
+        return new Vector2(topLeftCorner.x + cellSizeX / 2 + x * cellSizeX,
+            topLeftCorner.y - cellSizeY / 2 - y * cellSizeY);
+    }
+
+    public Tuple<int, int> CellFromPosition(Vector3 vec)
+    {
+        float cellSizeX = this.gameObject.transform.localScale.x * 10 / this.sizeX;
+        float cellSizeY = this.gameObject.transform.localScale.y * 10 / this.sizeY;
+
+        Vector2 topLeftCorner = new Vector2(
+            (this.gameObject.transform.position.x - 5) * this.gameObject.transform.localScale.x,
+            (this.gameObject.transform.position.y + 5) * this.gameObject.transform.localScale.y);
+
+        var cellX = Mathf.FloorToInt((vec.x - topLeftCorner.x) / cellSizeX);
+        var celly = Mathf.FloorToInt((topLeftCorner.y - vec.z) / cellSizeY);
+        return new Tuple<int, int>(cellX, celly);
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        float enter = 0.0f;
+        if (plane.Raycast(ray, out enter))
+        {
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Debug.Log(hitPoint.x + " " + hitPoint.y + " " + hitPoint.z);
+            var cell = this.CellFromPosition(hitPoint);
+            Debug.Log(cell.Item1 + " " + cell.Item2);
+        }
     }
 }

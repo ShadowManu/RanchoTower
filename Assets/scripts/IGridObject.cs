@@ -13,4 +13,6 @@ public interface IGridObject
     Tuple<int, int> GridPosition();
     // Says to the object that it should kill and clean for itself.
     void kill();
+
+    string Tag();
 }
