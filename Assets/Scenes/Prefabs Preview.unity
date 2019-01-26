@@ -836,56 +836,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5775756364968612386, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5775756364968612386, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5775756364968612386, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5775756364968612386, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8047686153525052334, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300002, guid: 1b57e744d547dac428aa833343c0bdce, type: 3}
-    - target: {fileID: 6964008630423537671, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
-    - target: {fileID: 4819209010358408014, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4819209010358408014, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4819209010358408014, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4819209010358408014, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a8e04bd65fd8b74c9927b6e0a8b4aa6, type: 3}
 --- !u!1001 &3857012941866555935
