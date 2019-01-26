@@ -9,15 +9,23 @@ public class ResourceManager : MonoBehaviour
     public const int baseProductionRate = 5;
     public const int intialGold = 25;
 
-
     public Resource gold;
-    public int goldPerSecond;    
+    public int goldPerSecond;  
+    public ResourceViewer rv;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        gold = GameObject.Find("Gold").GetComponent<Resource>();
+        
+        gold = GetComponent<Resource>();
+        rv = GetComponent<ResourceViewer>();
+
+        //gold = GameObject.Find("Gold").GetComponent<Resource>();
         gold.set(intialGold);
+        
+        
+        //rv.SetAmountText(gold.amount);
 
         InvokeRepeating("UpdateGold", 0f, 1f);
 
@@ -28,18 +36,18 @@ public class ResourceManager : MonoBehaviour
     {
             getGoldPerSecond();
             updateGold();
+            rv.SetAmountText(gold.amount);
     }
 
     void getGoldPerSecond(){
         goldPerSecond = baseProductionRate;
         int buildingProductionRate = 0;
 
-         ProductionBuilding[] productionBuildings = FindObjectsOfType(typeof(ProductionBuilding)) as ProductionBuilding[];
+        ProductionBuilding[] productionBuildings = FindObjectsOfType(typeof(ProductionBuilding)) as ProductionBuilding[];
         foreach (ProductionBuilding pb in productionBuildings)
         {
             buildingProductionRate += pb.productionRate;   
         }
-        Debug.Log(buildingProductionRate);
         goldPerSecond = baseProductionRate + buildingProductionRate;
 
     }
