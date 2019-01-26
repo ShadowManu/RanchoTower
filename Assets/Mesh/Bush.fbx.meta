@@ -1,24 +1,15 @@
 fileFormatVersion: 2
-guid: aed69e1d04bdc7444a9f9716a9f51f8f
+guid: 02c3219e1234cc64b86d6611596371ef
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Cone
-    100002: //RootNode
-    100004: Tower
-    400000: Cone
-    400002: //RootNode
-    400004: Tower
-    2100000: Texture
-    2300000: Cone
-    2300002: Tower
-    2300004: //RootNode
-    3300000: Cone
-    3300002: Tower
-    3300004: //RootNode
-    4300000: Cone
-    4300002: Tower
-    2186277476908879412: ImportLogs
+    100000: //RootNode
+    400000: //RootNode
+    2100000: Material.002
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Plane
+    4300002: Bush
   externalObjects: {}
   materials:
     importMaterials: 0
