@@ -19,6 +19,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8236956387822677123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682492587456022629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9572849, y: 1.9701332, z: 0.9583199}
+  m_Center: {x: 0.017468125, y: 0.9849332, z: -0.00000067055225}
+--- !u!114 &7991759228326367704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682492587456022629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6230910f2180f8e428d6e91ec9e8dfcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPosX: 0
+  gridPosY: 0
 --- !u!1 &6279582817821221655
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,15 +136,15 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
-    - target: {fileID: 2300002, guid: f8dfeb3885ba4b44a9154818b692c5cb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
     - target: {fileID: 2300004, guid: f8dfeb3885ba4b44a9154818b692c5cb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
     - target: {fileID: 2300006, guid: f8dfeb3885ba4b44a9154818b692c5cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
+    - target: {fileID: 2300002, guid: f8dfeb3885ba4b44a9154818b692c5cb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 291f5bb195ccb2c4582c928dc55cac0b, type: 2}
