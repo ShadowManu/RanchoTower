@@ -25,7 +25,7 @@ public class TowerAttackBehavior : MonoBehaviour
     rangeTrigger = GetComponentInChildren<CapsuleCollider>();
   }
 
-  void EnemyReached(GameObject gameObject)
+  public void EnemyReached(GameObject gameObject)
   {
     // If already attacking, ignore new enemy
     if (mode == TowerMode.Attack) return;
