@@ -23,13 +23,18 @@ public class ResourceState : MonoBehaviour
 
   void Start()
   {
-    InvokeRepeating("UpdateGold", 1f, 1f);
+    InvokeRepeating("UpdateGold", 1f, 4f);
   }
 
-  public void Spend(float amount)
+  public void Spend(float am)
   {
-    amount -= amount;
+    amount -= am;
     notifyAmountChange();
+  }
+
+  public bool CanSpend(float am)
+  {
+    return amount >= am;
   }
 
   private void UpdateGold()
