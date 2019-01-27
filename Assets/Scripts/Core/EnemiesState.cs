@@ -94,7 +94,7 @@ public class EnemiesState : MonoBehaviour
     int mobs = nEnemies;
     for (int i = 0; i < nums.Length; i++)
     {
-      int j = Random.Range(0, mobs);
+      int j = Random.Range(0, mobs + 1);
       spawners[nums[i]].RunSpawn(MobPrefab, j);
       mobs -= j;
     }

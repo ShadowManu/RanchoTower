@@ -31,7 +31,7 @@ public class HPBehaviour : MonoBehaviour
       if (gameObject.tag == "Enemy")
       {
         EnemyKillEvent();
-        Destroy(this);
+        Destroy(gameObject);
       }
       else
       {
