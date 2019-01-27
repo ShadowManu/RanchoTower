@@ -4,46 +4,37 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-  public GameObject MobPrefab; // Prefab to spawn
-  public GameObject EnemyTarget;
+    private GameObject Instantiator;
 
-  public float initialCooldown;
-  public float waveCooldown;
-  public int waveAmount;
-
-  void Start()
-  {
-    StartCoroutine("RunWaves");
-  }
-
-  IEnumerator RunWaves()
-  {
-    // Initial wait
-    yield return new WaitForSeconds(initialCooldown);
-
-    while (true)
+    private int amount;
+    void Start()
     {
-      // Spawn each mob with some delay
-      for (var i = 0; i < waveAmount; i++)
-      {
-        var mob = Instantiate(MobPrefab, transform.position, transform.rotation);
-        mob.GetComponent<EnemyBehavior>().target = EnemyTarget;
-
-        mob.GetComponent<Rigidbody>().AddForce(randomVector(), ForceMode.Impulse);
-        yield return new WaitForSeconds(0.3f);
-      }
-
-      // Wait between waves
-      yield return new WaitForSeconds(waveCooldown);
     }
-  }
 
-  Vector3 randomVector()
-  {
-    var MIN_FORCE = 5;
-    var MAX_FORCE = 10;
+    public void RunSpawn(GameObject o, int i)
+    {
+        Instantiator = o;
+        amount = i;
+        StartCoroutine("RunSpawnCo");
+    }
 
-    var direction = Vector3.ProjectOnPlane(Random.insideUnitCircle.normalized, Vector3.up);
-    return direction * Random.Range(MIN_FORCE, MAX_FORCE);
-  }
+    IEnumerator RunSpawnCo()
+    {
+        for (var i = 0; i < amount; i++)
+        {
+            var mob = Instantiate(Instantiator, transform.position, transform.rotation);
+
+            mob.GetComponent<Rigidbody>().AddForce(randomVector(), ForceMode.Impulse);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    Vector3 randomVector()
+    {
+        var MIN_FORCE = 5;
+        var MAX_FORCE = 10;
+
+        var direction = Vector3.ProjectOnPlane(Random.insideUnitCircle.normalized, Vector3.up);
+        return direction * Random.Range(MIN_FORCE, MAX_FORCE);
+    }
 }
