@@ -5,58 +5,56 @@ using UnityEngine;
 [System.Serializable]
 public class SpawnServer : MonoBehaviour
 {
-    public GameObject MobPrefab;
+  public GameObject MobPrefab;
+  public GameObject EnemyTarget;
 
-    public GameObject EnemyTarget;
+  public List<SpawnerPoint> spawners;
 
-    public List<Spawner> spawners;
+  public int WaveAmount;
+  public int WaveCooldown;
+  public int InitialCooldown;
 
-    public int WaveAmount;
+  // Start is called before the first frame update
+  void Start()
+  {
+    // Apply target to prefab (and future instances)
+    MobPrefab.GetComponent<EnemyBehavior>().target = EnemyTarget;
+    StartCoroutine("RunWaves");
+  }
 
-    public int WaveCooldown;
+  IEnumerator RunWaves()
+  {
+    // Initial wait
+    yield return new WaitForSeconds(InitialCooldown);
 
-    public int InitialCooldown;
-
-    // Start is called before the first frame update
-    void Start()
+    while (true)
     {
-        MobPrefab.GetComponent<EnemyBehavior>().target = EnemyTarget;
-        StartCoroutine("RunWaves");
-    }
+      var nums = new int[spawners.Count];
+      for (int i = 0; i < nums.Length; i++) nums[i] = i;
+      reshuffle(nums);
 
-    IEnumerator RunWaves()
+      int mobs = WaveAmount;
+      for (int i = 0; i < nums.Length; i++)
+      {
+        int j = Random.Range(0, mobs);
+        spawners[nums[i]].RunSpawn(MobPrefab, j);
+        mobs -= j;
+      }
+
+      // Wait between waves
+      yield return new WaitForSeconds(WaveCooldown);
+    }
+  }
+
+  void reshuffle(int[] arr)
+  {
+    // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+    for (int t = 0; t < arr.Length; t++)
     {
-        // Initial wait
-        yield return new WaitForSeconds(InitialCooldown);
-
-        while (true)
-        {
-            var nums = new int[spawners.Count];
-            for (int i = 0; i < nums.Length; i++) nums[i] = i;
-            reshuffle(nums);
-
-            int mobs = WaveAmount;
-            for (int i = 0; i < nums.Length; i++)
-            {
-                int j = Random.Range(0, mobs);
-                spawners[nums[i]].RunSpawn(MobPrefab, j);
-                mobs -= j;
-            }
-
-            // Wait between waves
-            yield return new WaitForSeconds(WaveCooldown);
-        }
+      var tmp = arr[t];
+      int r = Random.Range(t, arr.Length);
+      arr[t] = arr[r];
+      arr[r] = tmp;
     }
-
-    void reshuffle(int[] arr)
-    {
-        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
-        for (int t = 0; t < arr.Length; t++)
-        {
-            var tmp = arr[t];
-            int r = Random.Range(t, arr.Length);
-            arr[t] = arr[r];
-            arr[r] = tmp;
-        }
-    }
+  }
 }
