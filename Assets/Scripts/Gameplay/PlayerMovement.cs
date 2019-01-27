@@ -1,33 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
   float multiplier = 50;
   Rigidbody rb;
+  static Animator anim;
+
 
   void Start()
   {
     rb = GetComponent<Rigidbody>();
     rb.drag = 5;
+    anim = GetComponentInChildren<Animator>();
   }
 
   void Update()
   {
     // When the user clicks WASD, player moves physics-based in the given direction
-    detectAndApplyForce(KeyCode.W, Vector3.forward);
-    detectAndApplyForce(KeyCode.A, Vector3.left);
-    detectAndApplyForce(KeyCode.S, Vector3.back);
-    detectAndApplyForce(KeyCode.D, Vector3.right);
+    var inputDirection = InputDirection();
+
+    // Valid movement
+    if (inputDirection != Vector3.zero)
+    {
+      rb.AddForce(inputDirection * multiplier);
+      transform.DOLookAt(transform.position + inputDirection, 0);
+      anim.SetBool("walk", true);
+    }
+    else
+    {
+      anim.SetBool("walk", false);
+    }
   }
 
-  void detectAndApplyForce(KeyCode key, Vector3 direction)
+  private Vector3 InputDirection()
   {
-    if (Input.GetKey(key))
-    {
-      rb.AddForce(direction * multiplier);
-    }
+    var direction = Vector3.zero;
+
+    if (Input.GetKey(KeyCode.W)) direction += Vector3.forward;
+    if (Input.GetKey(KeyCode.A)) direction += Vector3.left;
+    if (Input.GetKey(KeyCode.S)) direction += Vector3.back;
+    if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
+
+    var normalized = direction.normalized;
+    var relativeToCamera = Camera.main.transform.TransformDirection(normalized);
+    var flat = Vector3.ProjectOnPlane(relativeToCamera, Vector3.up);
+
+    return flat;
   }
 }

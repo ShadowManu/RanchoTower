@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 9094337997106248350}
   - component: {fileID: 6545150217735454526}
   - component: {fileID: 228531851259454590}
+  - component: {fileID: 2181296476889259301}
   m_Layer: 0
   m_Name: Behavior
   m_TagString: Building
@@ -708,6 +709,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9572849, y: 1.9701332, z: 0.9583199}
   m_Center: {x: 0.017468125, y: 0.9849332, z: -0.00000067055225}
+--- !u!114 &2181296476889259301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461297523245157655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54060ddce0d5b4408a6d0fdcf78f8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionRate: 5
 --- !u!1 &1889978404753084920
 GameObject:
   m_ObjectHideFlags: 0
