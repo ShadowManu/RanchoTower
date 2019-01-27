@@ -8,15 +8,12 @@ public class PlayerMovement : MonoBehaviour
 {
   float multiplier = 50;
   Rigidbody rb;
-  Transform transform;
   static Animator anim;
 
 
   void Start()
   {
-
     rb = GetComponent<Rigidbody>();
-    transform = GetComponent<Transform>();
     rb.drag = 5;
     anim = GetComponentInChildren<Animator>();
   }
