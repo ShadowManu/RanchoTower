@@ -11,7 +11,7 @@ enum TowerMode
 public class TowerAttackBehavior : MonoBehaviour
 {
   public float power = 5.0f;
-  public int period = 1;
+  public float period = 0.5f;
 
   CapsuleCollider rangeTrigger;
   GameObject target;
@@ -55,7 +55,6 @@ public class TowerAttackBehavior : MonoBehaviour
     else
     {
       hPBehavior.decreaseHP(power);
-      Debug.Log("Attacked with: " + power + ". life is now: " + hPBehavior.currentHP);
     }
   }
 
@@ -70,7 +69,7 @@ public class TowerAttackBehavior : MonoBehaviour
 
     foreach (var collider in colliders)
     {
-      if (collider.gameObject.tag != "Enemy") return null;
+      if (collider.gameObject.tag != "Enemy") continue;
 
       var distance = (collider.gameObject.transform.position - transform.position).magnitude;
       if (distance < bestDistance)
