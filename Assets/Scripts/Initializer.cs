@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class initializer : MonoBehaviour
+// Helper monobehaviour to assing a house gameobject into a grid
+public class Initializer : MonoBehaviour
 {
-    public Grid grid;
-    public GameObject house;
-    // Start is called before the first frame update
-    void Start()
-    {
-        grid.Put((IGridObject)Instantiate(this.house).GetComponentInChildren(typeof(IGridObject)),500,500);
-        Destroy(this);
-    }
+  public Grid grid;
+  public GameObject housePrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  void Start()
+  {
+    var house = Instantiate(housePrefab);
+    var gridObject = house.GetComponentInChildren<IGridObject>();
+    grid.Put(gridObject, 500, 500);
+    Destroy(this);
+  }
 }
