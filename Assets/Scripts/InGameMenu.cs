@@ -1,5 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 public class InGameMenu : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class InGameMenu : MonoBehaviour
 		{
 			currentState = MenuStates.Pause;
 		}
+		
 		switch (currentState)
 		{
 			case MenuStates.Playing:
@@ -38,7 +41,7 @@ public class InGameMenu : MonoBehaviour
 				PauseWindow.SetActive(false);
 				SettingsWindow.SetActive(false);
 				HelpWindow.SetActive(false);
-				MenuUI.SetActive(false);
+				//MenuUI.SetActive(false);
 				Time.timeScale = 1;
 
 				break;
@@ -47,7 +50,7 @@ public class InGameMenu : MonoBehaviour
 				PauseWindow.SetActive(true);
 				SettingsWindow.SetActive(false);
 				HelpWindow.SetActive(false);
-				MenuUI.SetActive(false);
+				//MenuUI.SetActive(false);
 				Time.timeScale = 0;
 
 				break;
@@ -56,7 +59,7 @@ public class InGameMenu : MonoBehaviour
 				PauseWindow.SetActive(false);
 				SettingsWindow.SetActive(true);
 				HelpWindow.SetActive(false);
-				MenuUI.SetActive(false);
+				//MenuUI.SetActive(false);
 				Time.timeScale = 0;
 
 				break;
@@ -66,11 +69,28 @@ public class InGameMenu : MonoBehaviour
 				PauseWindow.SetActive(false);
 				SettingsWindow.SetActive(false);
 				HelpWindow.SetActive(true);
-				MenuUI.SetActive(false);
+				//MenuUI.SetActive(false);
 				Time.timeScale = 0;
 				break;
 		}
+
+		//Activates or desactivates the construction menu
+		if (Input.GetKeyDown(KeyCode.C) && currentState == MenuStates.Playing)
+		{
+			if (MenuUI.activeInHierarchy == false)
+			{
+				MenuUI.GetComponent<CanvasGroup>().DOFade(0, 0).WaitForCompletion();
+				MenuUI.SetActive(true);
+				MenuUI.GetComponent<CanvasGroup>().DOFade(1, .25f).WaitForCompletion();
+			}
+			else
+			{
+				StartCoroutine(HideUI());
+			}
+		}
 	}
+
+
 
 	public void Restart()
 	{
@@ -101,6 +121,12 @@ public class InGameMenu : MonoBehaviour
 	public void BackButton()
 	{
 		currentState = MenuStates.Pause;
+	}
+
+	private IEnumerator HideUI()
+	{
+		yield return MenuUI.GetComponent<CanvasGroup>().DOFade(0, .25f).WaitForCompletion();
+		MenuUI.SetActive(false);
 	}
 
 	public void SetSFXVolume(float sfxLv)
