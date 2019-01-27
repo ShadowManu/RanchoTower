@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+  public static Grid instance = null;
 
   public int sizeX;
   public int sizeY;
@@ -12,6 +13,16 @@ public class Grid : MonoBehaviour
   public Camera cam;
 
   private readonly Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+  void Awake()
+  {
+    // Singleton code
+    if (instance == null)
+      instance = this;
+    else if (instance != this)
+      Destroy(gameObject);
+    DontDestroyOnLoad(gameObject);
+  }
 
   // Start is called before the first frame update
   void Start()

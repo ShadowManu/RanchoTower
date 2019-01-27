@@ -51,7 +51,8 @@ public class StatViewer : MonoBehaviour
 
       case StatType.Enemies:
         var currentEnemies = EnemiesState.instance.currentEnemies;
-        return currentEnemies.ToString();
+        var currentWave = EnemiesState.instance.currentWave;
+        return currentEnemies.ToString() + " / " + currentWave.ToString();
 
       default:
         return "[No StatType selected]";
