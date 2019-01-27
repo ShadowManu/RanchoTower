@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c4e0f5fc7623449b4955842d1409dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHP: 30
-  currentHP: 30
+  totalHP: 20
+  currentHP: 20
   HPBar: []
 --- !u!1 &7116467058775355228
 GameObject:
