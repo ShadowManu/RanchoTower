@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 7851994682754214966}
   - component: {fileID: 2076847043403157348}
   - component: {fileID: 4160107975720782144}
+  - component: {fileID: 1286264086469074939}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Building
@@ -153,6 +154,21 @@ MonoBehaviour:
   gridPosX: 0
   gridPosY: 0
   price: 20
+--- !u!114 &1286264086469074939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440422069350076302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c4e0f5fc7623449b4955842d1409dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHP: 20
+  currentHP: 20
+  HPBar: []
 --- !u!1 &8654426447279572338
 GameObject:
   m_ObjectHideFlags: 0

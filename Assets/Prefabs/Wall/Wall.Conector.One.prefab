@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4311131799518823853}
   - component: {fileID: 6953804227671073534}
+  - component: {fileID: 6457559110542517032}
   m_Layer: 0
   m_Name: Wall.Conector.One
   m_TagString: Untagged
@@ -138,3 +139,18 @@ MonoBehaviour:
   gridPosX: 0
   gridPosY: 0
   price: 5
+--- !u!114 &6457559110542517032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390698055978788477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c4e0f5fc7623449b4955842d1409dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHP: 20
+  currentHP: 20
+  HPBar: []
