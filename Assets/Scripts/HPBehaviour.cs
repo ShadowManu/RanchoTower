@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void EnemyKillHandler();
+
 public class HPBehaviour : MonoBehaviour
 {
 
   public float totalHP;
   public float currentHP;
   public GameObject[] HPBar;
+
+  public static event EnemyKillHandler EnemyKillEvent;
 
   public void setHP(int t)
   {
@@ -19,9 +23,20 @@ public class HPBehaviour : MonoBehaviour
   public void decreaseHP(float dm)
   {
     currentHP = currentHP - dm;
-    if (currentHP <= 0) Destroy(gameObject);
+    if (currentHP <= 0)
+    {
+      // TODO: this should be improved
+
+      // if its an enemy, notify
+      if (gameObject.tag == "Enemy") EnemyKillEvent();
+      Destroy(gameObject);
+    }
   }
 
+  public bool isAlive()
+  {
+    return currentHP > 0;
+  }
 
   void checkHP()
   {
