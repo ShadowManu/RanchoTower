@@ -5,12 +5,11 @@ using UnityEngine;
 public class ResourceState : MonoBehaviour
 {
   public static ResourceState instance = null;
-  public static event EmptyHandler AmountChange;
+  public event EmptyHandler AmountChange;
 
-  public float initialAmount = 25f;
+  public float amount = 25f;
   public float localRate = 5f;
 
-  private float amount;
 
   void Awake()
   {
@@ -24,21 +23,20 @@ public class ResourceState : MonoBehaviour
 
   void Start()
   {
-    amount = initialAmount;
     InvokeRepeating("UpdateGold", 1f, 1f);
   }
 
   public void Spend(float amount)
   {
     amount -= amount;
-    AmountChange();
+    notifyAmountChange();
   }
 
   private void UpdateGold()
   {
     var rate = GlobalRate();
     amount += rate;
-    AmountChange();
+    notifyAmountChange();
   }
 
   private float GlobalRate()
@@ -49,6 +47,11 @@ public class ResourceState : MonoBehaviour
     foreach (var building in buildings)
       extra += building.productionRate;
 
-    return extra;
+    return localRate + extra;
+  }
+
+  private void notifyAmountChange()
+  {
+    if (AmountChange != null) AmountChange();
   }
 }
