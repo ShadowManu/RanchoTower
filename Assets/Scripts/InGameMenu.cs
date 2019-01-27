@@ -114,8 +114,7 @@ public class InGameMenu : MonoBehaviour
 
 	public void Exit()
 	{
-		UnityEditor.EditorApplication.isPlaying = false;
-		Application.Quit();
+		SceneManager.LoadScene(0);
 	}
 
 	public void BackButton()
