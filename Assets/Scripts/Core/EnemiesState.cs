@@ -76,6 +76,9 @@ public class EnemiesState : MonoBehaviour
 
   IEnumerator EndWave()
   {
+    // Difficulty modifier
+    nEnemies = (int)Mathf.Floor(nEnemies * 1.2f);
+
     // we can do something short additionally here
     yield return new WaitForSeconds(waveEndTime);
     StartWave();
