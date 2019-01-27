@@ -12,9 +12,12 @@ enum EnemyMode
 public class EnemyBehavior : MonoBehaviour
 {
   public float speed = 0.1f;
-  public GameObject target;
-  public IBuilding targetBuilding;
+  public float power = 5.0f;
+  public int period = 2;
 
+  public GameObject target;
+
+  private HPBehaviour hPBehaviour;
   private Rigidbody rb;
   private EnemyMode mode = EnemyMode.Seek;
 
@@ -63,16 +66,15 @@ public class EnemyBehavior : MonoBehaviour
     if (tag != "Building" || mode == EnemyMode.Attack) return;
 
     mode = EnemyMode.Attack;
-    targetBuilding = gameObject.GetComponent(typeof(IBuilding)) as IBuilding;
+    hPBehaviour = gameObject.GetComponent<HPBehaviour>();
 
-    var ATTACK_PERIOD = 2;
-    InvokeRepeating("AttackCycle", 0, ATTACK_PERIOD);
+    InvokeRepeating("AttackCycle", 0, period);
   }
 
   void AttackCycle()
   {
     // Check building is dead
-    if (targetBuilding == null)
+    if (hPBehaviour == null)
     {
       CancelInvoke("AttackCycle");
       mode = EnemyMode.Seek;
@@ -80,6 +82,6 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     // Otherwise, make damage
-    targetBuilding.Injure(5);
+    hPBehaviour.decreaseHP(power);
   }
 }
