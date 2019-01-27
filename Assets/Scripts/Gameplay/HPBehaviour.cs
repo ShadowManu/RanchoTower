@@ -28,8 +28,15 @@ public class HPBehaviour : MonoBehaviour
       // TODO: this should be improved
 
       // if its an enemy, notify
-      if (gameObject.tag == "Enemy") EnemyKillEvent();
-      Destroy(gameObject);
+      if (gameObject.tag == "Enemy")
+      {
+        EnemyKillEvent();
+        Destroy(this);
+      }
+      else
+      {
+        Grid.instance.Remove(GetComponent<IGridObject>());
+      }
     }
   }
 

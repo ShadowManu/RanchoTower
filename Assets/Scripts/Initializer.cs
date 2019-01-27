@@ -14,7 +14,7 @@ public class Initializer : MonoBehaviour
     var gridObject = house.GetComponentInChildren<IGridObject>();
     grid.Put(gridObject, 500, 500);
 
-    EnemiesState.instance.EnemyTarget = house;
+    EnemiesState.instance.EnemyTarget = house.transform.GetChild(0).gameObject;
 
     Destroy(this);
   }
