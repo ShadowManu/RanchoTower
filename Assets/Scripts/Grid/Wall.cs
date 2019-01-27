@@ -29,7 +29,7 @@ public class Wall : MonoBehaviour, IGridObject
 
   public void kill()
   {
-    Destroy(this);
+    Destroy(transform.parent.gameObject);
   }
 
   public string Tag()

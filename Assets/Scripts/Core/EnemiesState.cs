@@ -16,7 +16,6 @@ public class EnemiesState : MonoBehaviour
 
   public GameObject MobPrefab;
   public GameObject EnemyTarget;
-  public List<SpawnerPoint> spawners;
   public float wavePrepTime = 10f;
   public float waveEndTime = 1f;
 
@@ -25,6 +24,8 @@ public class EnemiesState : MonoBehaviour
 
   public int currentWave = 0;
   public int currentEnemies = 0;
+
+  private List<SpawnerPoint> spawners;
 
   void Awake()
   {
@@ -38,6 +39,13 @@ public class EnemiesState : MonoBehaviour
 
   void Start()
   {
+    spawners = new List<SpawnerPoint>();
+    foreach (var item in GetComponentsInChildren<SpawnerPoint>())
+      spawners.Add(item);
+
+    // Apply target to prefab (and future instances)
+    MobPrefab.GetComponent<EnemyBehavior>().target = EnemyTarget;
+
     HPBehaviour.EnemyKillEvent += OnEnemyKilled;
     StartWave();
   }
@@ -48,6 +56,7 @@ public class EnemiesState : MonoBehaviour
   {
     currentWave += 1;
     currentEnemies = nEnemies;
+    notifyCurrentEnemies();
     StartCoroutine(DelayedSpawn());
   }
 
@@ -60,6 +69,7 @@ public class EnemiesState : MonoBehaviour
   void OnEnemyKilled()
   {
     currentEnemies -= 1;
+    notifyCurrentEnemies();
     if (currentEnemies == 0)
       StartCoroutine(EndWave());
   }
@@ -88,5 +98,10 @@ public class EnemiesState : MonoBehaviour
       spawners[nums[i]].RunSpawn(MobPrefab, j);
       mobs -= j;
     }
+  }
+
+  private void notifyCurrentEnemies()
+  {
+    if (CurrentEnemiesChange != null) CurrentEnemiesChange();
   }
 }
