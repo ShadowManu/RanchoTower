@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPosX: 0
   gridPosY: 0
+  price: 30
 --- !u!1 &6279582817821221655
 GameObject:
   m_ObjectHideFlags: 0

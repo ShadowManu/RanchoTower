@@ -4,45 +4,48 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour, IGridObject
 {
-    private readonly bool[,] shape = new bool[,] { { true } };
-    public int gridPosX;
-    public int gridPosY;
+  private readonly bool[,] shape = new bool[,] { { true } };
+  public int gridPosX;
+  public int gridPosY;
 
-    public void SetGridPosition(int x, int y)
-    {
-        this.gridPosX = x;
-        this.gridPosY = y;
-    }
+  public float price;
+  public float Price() { return price; }
 
-    public Tuple<bool[,], Tuple<int, int>> Space()
-    {
-        return new Tuple<bool[,], Tuple<int, int>>(shape, new Tuple<int, int>(shape.GetLength(0), shape.GetLength(1)));
-    }
+  public void SetGridPosition(int x, int y)
+  {
+    this.gridPosX = x;
+    this.gridPosY = y;
+  }
 
-    public Tuple<int, int> GridPosition()
-    {
-        return new Tuple<int, int>(gridPosX, gridPosY);
-    }
+  public Tuple<bool[,], Tuple<int, int>> Space()
+  {
+    return new Tuple<bool[,], Tuple<int, int>>(shape, new Tuple<int, int>(shape.GetLength(0), shape.GetLength(1)));
+  }
 
-    public void kill()
-    {
-        Destroy(this);
-    }
+  public Tuple<int, int> GridPosition()
+  {
+    return new Tuple<int, int>(gridPosX, gridPosY);
+  }
 
-    public string Tag()
-    {
-        return this.gameObject.tag;
-    }
+  public void kill()
+  {
+    Destroy(this);
+  }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+  public string Tag()
+  {
+    return this.gameObject.tag;
+  }
 
-    }
+  // Start is called before the first frame update
+  void Start()
+  {
 
-    // Update is called once per frame
-    void Update()
-    {
+  }
 
-    }
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
 }
