@@ -13,6 +13,9 @@ public class Initializer : MonoBehaviour
     var house = Instantiate(housePrefab);
     var gridObject = house.GetComponentInChildren<IGridObject>();
     grid.Put(gridObject, 500, 500);
+
+    EnemiesState.instance.EnemyTarget = house;
+
     Destroy(this);
   }
 }
