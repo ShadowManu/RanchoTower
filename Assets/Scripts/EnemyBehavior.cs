@@ -31,7 +31,7 @@ public class EnemyBehavior : MonoBehaviour
   // Update is called once per frame
   void FixedUpdate()
   {
-    if (mode == EnemyMode.Seek) MoveTowardsTarget();
+    if (mode == EnemyMode.Seek && target != null) MoveTowardsTarget();
   }
 
   void onDestroy()
@@ -73,15 +73,19 @@ public class EnemyBehavior : MonoBehaviour
 
   void AttackCycle()
   {
-    // Check building is dead
-    if (hPBehaviour == null)
+    // Attack if possible
+    if (CanAttack()) hPBehaviour.decreaseHP(power);
+
+    // Finish attacking if so
+    if (!CanAttack())
     {
       CancelInvoke("AttackCycle");
       mode = EnemyMode.Seek;
-      return;
     }
+  }
 
-    // Otherwise, make damage
-    hPBehaviour.decreaseHP(power);
+  private bool CanAttack()
+  {
+    return hPBehaviour != null && hPBehaviour.isAlive();
   }
 }
