@@ -20,18 +20,27 @@ public class Placer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     public void SetPrefab(GameObject _Prefab){ 
         this.Prefab = _Prefab;
         intancedO = Instantiate(Prefab);
-        instancedOriginalM = intancedO.transform.GetChild(0).GetComponent<MeshRenderer>().material;
-     }
+        instancedOriginalM = intancedO.transform.GetChild(0)
+            .GetComponent<MeshRenderer>().material;
+    }
+
+    public void unsetPrefab(){ 
+        Destroy(intancedO);
+        this.Prefab = null;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(1)) {
+            this.unsetPrefab();
+        }
         if (Prefab != null)
         {
             var pos = Grid.CurrentCellPosition();
