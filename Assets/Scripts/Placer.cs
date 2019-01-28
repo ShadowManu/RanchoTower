@@ -18,20 +18,17 @@ public class Placer : MonoBehaviour
 
     private GameObject intancedO;
 
-    private Material instancedOriginalM;
+    private Tuple<bool,int> SetPrefabPromise;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        SetPrefabPromise = new Tuple<bool, int>(false, 0);
     }
 
     public void SetPrefab(int index)
     {
-        this.Prefab = Prefabs[index];
-        intancedO = Instantiate(PrefabsShadows[index]);
-        instancedOriginalM = intancedO.transform.GetChild(0)
-            .GetComponent<MeshRenderer>().material;
+        SetPrefabPromise = new Tuple<bool, int>(true, index);
     }
 
     public void unsetPrefab()
@@ -43,6 +40,11 @@ public class Placer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SetPrefabPromise.Item1) {
+            this.Prefab = Prefabs[SetPrefabPromise.Item2];
+            intancedO = Instantiate(PrefabsShadows[SetPrefabPromise.Item2]);
+            SetPrefabPromise = new Tuple<bool, int>(false, 0);
+        }
         if (Input.GetMouseButtonDown(1))
         {
             this.unsetPrefab();
@@ -54,6 +56,7 @@ public class Placer : MonoBehaviour
             intancedO.transform.position = new Vector3(pos2.x, 0, pos2.y);
             var igrid = (IGridObject)intancedO.GetComponentInChildren(typeof(IGridObject));
             igrid.SetGridPosition(pos.Item1.Item1, pos.Item1.Item2);
+
             if (Grid.CanAdd(igrid, pos.Item1.Item1, pos.Item1.Item2))
             {
                 var meshrenderers = intancedO.GetComponentsInChildren<MeshRenderer>();
@@ -66,7 +69,6 @@ public class Placer : MonoBehaviour
                     tempIgrid.SetGridPosition(pos.Item1.Item1, pos.Item1.Item2);
                     Grid.Put(tempIgrid, pos.Item1.Item1, pos.Item1.Item2);
                     igrid.SetGridPosition(pos.Item1.Item1, pos.Item1.Item2);
-                    intancedO.transform.GetChild(0).GetComponent<MeshRenderer>().material = instancedOriginalM;
                     Prefab = null;
                     Destroy(intancedO);
                 }
