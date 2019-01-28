@@ -41,6 +41,7 @@ public class Placer : MonoBehaviour
     void Update()
     {
         if (SetPrefabPromise.Item1) {
+            if (intancedO != null) this.unsetPrefab();
             this.Prefab = Prefabs[SetPrefabPromise.Item2];
             intancedO = Instantiate(PrefabsShadows[SetPrefabPromise.Item2]);
             SetPrefabPromise = new Tuple<bool, int>(false, 0);
@@ -59,8 +60,8 @@ public class Placer : MonoBehaviour
 
             if (Grid.CanAdd(igrid, pos.Item1.Item1, pos.Item1.Item2))
             {
-                var meshrenderers = intancedO.GetComponentsInChildren<Renderer>();
-                foreach (Renderer mr in meshrenderers) mr.material = CanPlace;
+                var meshrenderers = intancedO.GetComponentsInChildren<MeshRenderer>();
+                foreach (MeshRenderer mr in meshrenderers) mr.material = CanPlace;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     var temp = Instantiate(this.Prefab);
@@ -75,8 +76,8 @@ public class Placer : MonoBehaviour
             }
             else
             {
-                var meshrenderers = intancedO.GetComponentsInChildren<Renderer>();
-                foreach (Renderer mr in meshrenderers) mr.material = NoPlace;
+                var meshrenderers = intancedO.GetComponentsInChildren<MeshRenderer>();
+                foreach (MeshRenderer mr in meshrenderers) mr.material = NoPlace;
             }
         }
     }
