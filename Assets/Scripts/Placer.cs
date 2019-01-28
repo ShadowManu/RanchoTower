@@ -41,6 +41,7 @@ public class Placer : MonoBehaviour
     void Update()
     {
         if (SetPrefabPromise.Item1) {
+            if (intancedO != null) this.unsetPrefab();
             this.Prefab = Prefabs[SetPrefabPromise.Item2];
             intancedO = Instantiate(PrefabsShadows[SetPrefabPromise.Item2]);
             SetPrefabPromise = new Tuple<bool, int>(false, 0);
