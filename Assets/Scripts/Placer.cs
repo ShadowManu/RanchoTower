@@ -59,8 +59,8 @@ public class Placer : MonoBehaviour
 
             if (Grid.CanAdd(igrid, pos.Item1.Item1, pos.Item1.Item2))
             {
-                var meshrenderers = intancedO.GetComponentsInChildren<MeshRenderer>();
-                foreach (MeshRenderer mr in meshrenderers) mr.material = CanPlace;
+                var meshrenderers = intancedO.GetComponentsInChildren<Renderer>();
+                foreach (Renderer mr in meshrenderers) mr.material = CanPlace;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     var temp = Instantiate(this.Prefab);
@@ -75,8 +75,8 @@ public class Placer : MonoBehaviour
             }
             else
             {
-                var meshrenderers = intancedO.GetComponentsInChildren<MeshRenderer>();
-                foreach (MeshRenderer mr in meshrenderers) mr.material = NoPlace;
+                var meshrenderers = intancedO.GetComponentsInChildren<Renderer>();
+                foreach (Renderer mr in meshrenderers) mr.material = NoPlace;
             }
         }
     }
