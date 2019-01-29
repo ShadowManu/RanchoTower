@@ -39,6 +39,8 @@ public class HPBehaviour : MonoBehaviour
       if (gameObject.tag == "Enemy")
       {
         EnemyKillEvent();
+        if (GetComponent<UIMessage>())
+          GetComponent<UIMessage>().Show();
         Destroy(gameObject);
       }
       else
