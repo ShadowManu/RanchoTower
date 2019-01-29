@@ -21,7 +21,6 @@ public class Grid : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
     }
 
     public string CellTag(int x, int y)
