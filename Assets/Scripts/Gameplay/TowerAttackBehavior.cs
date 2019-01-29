@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using DG.Tweening;
 
 enum TowerMode
 {
@@ -12,12 +14,32 @@ public class TowerAttackBehavior : MonoBehaviour
 {
   public float power = 5.0f;
   public float period = 0.5f;
+  public GameObject arrow;
+  public Transform spawnPoint;
 
   CapsuleCollider rangeTrigger;
   GameObject target;
   HPBehaviour hPBehavior;
 
   TowerMode mode = TowerMode.Watch;
+
+
+  
+  void arrowAnimation()
+  {
+    if (target){ 
+      Transform enemy = target.transform;
+      GameObject a = Instantiate(arrow, spawnPoint.transform.position, Quaternion.identity);
+      ConstraintSource c = new ConstraintSource();
+      c.sourceTransform = enemy;
+      c.weight = 1;
+      a.GetComponent<LookAtConstraint>().SetSource(0, c);
+      a.transform.DOMoveX(enemy.position.x, 0.5f);
+      a.transform.DOMoveZ(enemy.position.z, 0.5f);
+      a.transform.DOMoveY(enemy.position.y, 0.5f).SetEase(Ease.InQuad);
+      Destroy(a, 1f);
+    }
+  }
 
   // Start is called before the first frame update
   void Start()
@@ -34,7 +56,8 @@ public class TowerAttackBehavior : MonoBehaviour
     target = gameObject;
     hPBehavior = gameObject.GetComponent<HPBehaviour>();
 
-    InvokeRepeating("AttackCycle", 0, period);
+    arrowAnimation();
+    InvokeRepeating("AttackCycle", period, period);
   }
 
   void AttackCycle()
@@ -56,6 +79,7 @@ public class TowerAttackBehavior : MonoBehaviour
     {
       hPBehavior.decreaseHP(power);
     }
+    arrowAnimation();
   }
 
   GameObject FindCloseEnemy()

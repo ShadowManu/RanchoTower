@@ -250,7 +250,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHP: 20
   currentHP: 20
-  HPBar: []
+  HPBarContainer: {fileID: 0}
+  HPBar: {fileID: 0}
 --- !u!1 &7116467058775355228
 GameObject:
   m_ObjectHideFlags: 0

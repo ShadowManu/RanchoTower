@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Building
   - Enemy
+  - Arrow
   layers:
   - Default
   - TransparentFX
