@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public delegate void EnemyKillHandler();
 
@@ -10,7 +11,10 @@ public class HPBehaviour : MonoBehaviour
 
   public float totalHP;
   public float currentHP;
-  public GameObject[] HPBar;
+
+
+  public CanvasGroup HPBarContainer;
+  public Image HPBar;
 
   public static event EnemyKillHandler EnemyKillEvent;
 
@@ -22,7 +26,11 @@ public class HPBehaviour : MonoBehaviour
 
   public void decreaseHP(float dm)
   {
+    if (currentHP == totalHP)
+      HPBarContainer.DOFade(1, .2f);
+
     currentHP = currentHP - dm;
+    updateHPBar(currentHP/totalHP);
     if (currentHP <= 0)
     {
       // TODO: this should be improved
@@ -62,25 +70,11 @@ public class HPBehaviour : MonoBehaviour
     return index;
   }
 
-  public void updateHP()
+  public void updateHPBar(float to)
   {
 
-    //Debug.Log(pb.productionRate);
-    int barTotal = transform.GetChild(0).GetChild(0).childCount;
-
-    int barIndex = getHPbarIndex();
-
-    Debug.Log(barIndex);
-
-    for (int i = 0; i < barIndex; i++)
-    {
-      HPBar[i].GetComponent<Image>().color = Color.white;
-    }
-
-    for (int i = barIndex; i < barTotal; i++)
-    {
-      HPBar[i].GetComponent<Image>().color = Color.black;
-    }
+    HPBar.DOKill();
+    HPBar.DOFillAmount(to, .2f); 
 
   }
 
