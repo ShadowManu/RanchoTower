@@ -33,14 +33,13 @@ public class HPBehaviour : MonoBehaviour
     updateHPBar(currentHP/totalHP);
     if (currentHP <= 0)
     {
+      
       // TODO: this should be improved
 
       // if its an enemy, notify
       if (gameObject.tag == "Enemy")
       {
         EnemyKillEvent();
-        if (GetComponent<UIMessage>())
-          GetComponent<UIMessage>().Show();
         Destroy(gameObject);
       }
       else

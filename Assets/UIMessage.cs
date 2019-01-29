@@ -16,10 +16,10 @@ public class UIMessage : MonoBehaviour
         c = GameObject.Find("ScoreScreen").GetComponent<CanvasGroup>();
         score = c.transform.GetChild(1).GetComponent<Text>();
     }
-    public void Show()
+    void OnDestroy()
     {
         score.text = EnemiesState.instance.currentWave.ToString();
-        c.DOFade(1, .5f);
+        c.alpha = 1;
         Invoke("Exit", 4);
         
     }
