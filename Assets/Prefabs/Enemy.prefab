@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 401874618977850924}
   - component: {fileID: 401874618977080844}
   - component: {fileID: 401874618975950028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 401874618977850926}
   - component: {fileID: 401874618977080846}
   - component: {fileID: 401874618975950030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 6244744460801779283}
   - component: {fileID: 8777782881030317133}
   - component: {fileID: 414783224728480097}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1734053563213740426}
   - component: {fileID: 3766265933458118450}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6974913425474247051}
   - component: {fileID: 6249552211975373169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
